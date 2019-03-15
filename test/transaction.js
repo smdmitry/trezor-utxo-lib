@@ -138,6 +138,46 @@ describe('Transaction', function () {
     })
   })
 
+  describe('fromBuffer/fromHex for Doge', function () {
+    fixtures.doge.valid.forEach(function (testData) {
+      it('imports ' + testData.description, function () {
+        const tx = Transaction.fromHex(testData.hex, networks.doge)
+        assert.equal(tx.ins.length, testData.ins.length)
+        assert.equal(tx.outs.length, testData.outs.length)
+        for (var i = 0; i < tx.ins.length; i++) {
+          assert.equal(tx.ins[i].hash.toString('hex'), testData.ins[i].hash)
+          assert.equal(tx.ins[i].index, testData.ins[i].index)
+          assert.equal(tx.ins[i].script.toString('hex'), testData.ins[i].script)
+          assert.equal(tx.ins[i].sequence, testData.ins[i].sequence)
+        }
+
+        for (var i = 0; i < tx.outs.length; i++) {
+          assert.equal(tx.outs[i].value, testData.outs[i].value)
+          assert.equal(tx.outs[i].script.toString('hex'), testData.outs[i].script)
+        }
+      })
+    })
+
+    fixtures.doge.valid.forEach(function (testData) {
+      it('exports ' + testData.description, function () {
+        const tx = Transaction.fromHex(testData.hex, networks.doge)
+        const hashTx = tx.getId()
+        const hexTx = tx.toHex()
+        assert.equal(testData.hex, hexTx)
+        assert.equal(testData.hash, hashTx)
+      })
+    })
+
+    fixtures.doge.valid.forEach(function (testData) {
+      it('clone ' + testData.description, function () {
+        const tx = Transaction.fromHex(testData.hex, networks.doge)
+        const clonedTx = tx.clone()
+        assert.equal(clonedTx.toHex(), testData.hex)
+      })
+    })
+
+  })
+
   describe('fromBuffer/fromHex for Testnet Dash', function () {
     fixtures.dasht.valid.forEach(function (testData) {
       it('imports ' + testData.description, function () {
