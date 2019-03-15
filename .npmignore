@@ -1,0 +1,25 @@
+# Dev directories
+coverage
+.nyc_output
+.arcconfig
+.arclint
+.travis.yml
+
+# Editors
+.editorconfig
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Dependency directory
+node_modules
+yarn.lock
+
+# OSX
+.DS_Store
+
+# Logs
+logs
+*.log
+.yarnclean
