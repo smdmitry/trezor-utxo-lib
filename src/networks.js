@@ -25,6 +25,17 @@ module.exports = {
     wif: 0xef, // https://github.com/dashpay/godashutil/blob/master/wif.go#L72
     coin: coins.DASH
   },
+  doge: {
+    messagePrefix: '\x19DogeCoin Signed Message:\n',
+    bip32: {
+      public: 0x02FACAFD,
+      private: 0x02FAC398
+    },
+    pubKeyHash: 0x1e,
+    scriptHash: 0x16,
+    wif: 0x80,
+    coin: coins.DOGE
+  },
   bitcoincash: {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
     bech32: 'bc',
